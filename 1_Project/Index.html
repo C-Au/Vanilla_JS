@@ -1,17 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Number Checking App</title>
-</head>
-<body>
+     <script src="script.js" defer></script>
+  </head>
+  <body>
+    <label for="numberInput">Type in your number (up to 3 digits):</label>
+    <input type="number" id="numberInput" name="numberInput" />
+    <br />
 
-<label for="numberInput">Type in your number (up to 3 digits):</label>
-<input type="text" id="numberInput" name="numberInput">
-<br>
+    <button id="button">Click Me!</button>
+    <br />
 
-<button type="number">Click Me!</button>
-    
-</body>
+    <div id="numberResult"></div>
+  </body>
 </html>
