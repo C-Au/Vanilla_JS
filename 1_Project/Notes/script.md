@@ -1,6 +1,6 @@
 # script.js Walkthrough
 
-This file is the behavior layer for the page. Right now, it connects the elements from `Index.html` and sets up a click handler, but the main function is still empty, so the button does not do anything yet.
+This file is the behavior layer for the page. It connects the elements from `Index.html`, reads the user’s input, and displays a message based on the number entered.
 
 ## What the script is doing
 
@@ -24,21 +24,27 @@ These variables let the script interact with the HTML without searching for the 
 
 ### 2. Setting up the action
 
-`function checkNumber() {}` creates the function that will eventually handle the validation or message display.
+`function checkNumber() {}` creates the function that handles the validation and message display.
 
-At the moment, it is empty, so clicking the button does not change anything.
+Inside the function, the input value is converted with `Number(userNumber.value)`, then checked against several cases: not a number, zero, negative, even, and odd.
 
 ### 3. Connecting the button
 
 `buttonClick.addEventListener("click", checkNumber);` tells the browser to run `checkNumber` whenever the button is clicked.
 
-This is the part that wires the interface together. The button is ready, the input is ready, and the result area is ready, but the actual logic still needs to be added inside `checkNumber`.
+This is the part that wires the interface together. The button is ready, the input is ready, and the result area is ready, and the logic inside `checkNumber` updates the result text.
 
 ## Current behavior
 
-The script successfully connects to the HTML elements and listens for clicks, but it does not yet read the input value, validate it, or display anything in the result area.
+The script successfully connects to the HTML elements and listens for clicks. When the button is pressed, it reads the input value, validates it, and displays a result message in the result area.
+
+## Change Log
+
+- 2026-06-29: Updated the walkthrough to match the current working function.
+- 2026-06-29: Documented the number checks for invalid input, zero, negative numbers, even numbers, and odd numbers.
+- 2026-06-29: Added the current result messages shown in `#numberResult`.
 
 ## Notes
 
 - `buttonClick`, `resultDisplay`, and `userNumber` are clear variable names because they describe what each element is used for.
-- If you want this file to do the checking work, the next step is to fill in `checkNumber()` with logic that reads the input and updates `resultDisplay`.
+- `Number.isNaN(userNum)` is used to catch values that cannot be converted into a number.

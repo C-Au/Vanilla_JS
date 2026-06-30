@@ -1,6 +1,6 @@
 # Index.html Walkthrough
 
-This page is a small starter UI for checking a number. Right now, `Index.html` provides the structure and `script.js` is linked for future behavior, but the script file is empty, so the page does not actually validate or process the input yet.
+This page is a small starter UI for checking a number. `Index.html` provides the structure, and `script.js` is linked with `defer` so the JavaScript can handle the number checking after the page loads.
 
 ## What the page is doing
 
@@ -27,16 +27,16 @@ The `<head>` contains:
 
 Inside the `<body>`, the page shows a label and input:
 
-- `<label for="numberInput">Type in your number (up to 3 digits):</label>` connects the label to the input for accessibility.
-- `<input type="number" id="numberInput" name="numberInput" />` creates a numeric input field.
+- `<label for="numberInput">Type in your number (whole numbers only, no decimal digits):</label>` connects the label to the input for accessibility.
+- `<input type="text" id="numberInput" name="numberInput" />` creates a text field that the script later converts into a number.
 
-Even though the label says “up to 3 digits,” the HTML does not currently enforce that limit. There is no `maxlength`, `min`, `max`, or JavaScript validation yet.
+The HTML itself does not enforce number rules yet. The validation happens in `script.js`, which checks whether the value is a real number, zero, negative, even, or odd.
 
 ### 3. Action button
 
 `<button id="button">Click Me!</button>` gives the user a button to trigger checking logic.
 
-At the moment, the button has no visible behavior because `script.js` is empty.
+The button now has behavior because `script.js` listens for clicks and runs the checking function.
 
 ### 4. Output area
 
@@ -50,9 +50,15 @@ This is probably where the script will eventually show messages like:
 
 ## Current behavior
 
-The page renders a simple layout, but it does not yet do any checking. The important IDs are already in place, which means the HTML is set up for JavaScript to hook into later.
+The page renders a simple layout and works with the script file to check the number entered by the user. The important IDs are in place, which means the HTML is set up for JavaScript to read the input and show the result.
+
+## Change Log
+
+- 2026-06-29: Updated the walkthrough to match the current markup and behavior.
+- 2026-06-29: Replaced the old input description with the current whole-number label and text input.
+- 2026-06-29: Noted that `script.js` now handles the validation and output behavior.
 
 ## Notes
 
 - The file name is `Index.html`, but the title says `Number Checking App`; that is consistent with the intended purpose.
-- If you want the input to truly accept only up to 3 digits, the next step would be adding validation in `script.js` and possibly HTML constraints.
+- The script currently distinguishes between invalid input, zero, negative numbers, even numbers, and odd numbers.
