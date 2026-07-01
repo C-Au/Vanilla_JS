@@ -6,7 +6,8 @@ This page is a simple shopping list UI. `Index.html` provides the structure, and
 
 - Sets the document language to English with `<html lang="en">`.
 - Defines basic page metadata like character encoding and responsive viewport settings.
-- Uses a title `Shopping List`, which appears in the browser tab.
+- Uses a title `Simple Shopping List`, which appears in the browser tab.
+- Links to `styles.css` for styling the page.
 - Loads `script.js` with `defer`, so the browser waits to run the script until the HTML is parsed.
 - Displays an input field, a button to add items, and a list to display products.
 
@@ -20,19 +21,22 @@ The `<head>` contains:
 
 - `<meta charset="UTF-8" />` so the browser reads text correctly.
 - `<meta name="viewport" content="width=device-width, initial-scale=1.0" />` so the page scales properly on mobile.
-- `<title>Shopping List</title>` for the tab title.
+- `<title>Simple Shopping List</title>` for the tab title.
+- `<link rel="stylesheet" href="styles.css">` to link the external stylesheet for styling.
 - `<script src="script.js" defer></script>` to connect the JavaScript file without blocking page rendering.
 
 ### 2. Input area
 
-Inside the `<body>`, the page shows a label and input:
+Inside the `<body>`, the page displays an input field:
 
-- `<label for="productInput">Add a product:</label>` connects the label to the input for accessibility.
-- `<input type="text" id="productInput" name="productInput" />` creates a text field where users type product names.
+- `<input type="text" id="productInput" name="productInput" placeholder="Type in the product you want to add" maxlength="50" autofocus />` creates a text field where users type product names.
+  - `placeholder` shows hint text: "Type in the product you want to add"
+  - `maxlength="50"` limits input to 50 characters
+  - `autofocus` puts the cursor in the field when the page loads
 
 ### 3. Add button
 
-`<button id="button">Add Item</button>` gives the user a button to trigger adding items to the list.
+`<button id="button">Click to add product</button>` gives the user a button to trigger adding items to the list.
 
 The button gets behavior from `script.js`, which listens for clicks and adds the product to the cart.
 
@@ -42,6 +46,15 @@ The button gets behavior from `script.js`, which listens for clicks and adds the
 
 This is where `script.js` will dynamically create and display each item from the shopping cart.
 
+### 5. Styling with styles.css
+
+The external stylesheet `styles.css` provides styling for the page elements:
+
+- `#productInput` — Styles the input field with width and padding adjustments to make it more visually appealing and easier to use.
+
+The stylesheet separates the presentation layer from the HTML structure, making the code more organized and maintainable.
+
 ## Change Log
 
 - 2026-07-01: Created initial documentation for shopping list HTML structure.
+- 2026-07-01: Added stylesheet link to `styles.css`, input attributes (`placeholder`, `maxlength`, `autofocus`), removed label element, and updated button text.

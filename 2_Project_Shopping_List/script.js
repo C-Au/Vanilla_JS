@@ -6,7 +6,8 @@ const userInput = document.getElementById("productInput");
 function addProduct() {
   const inputProduct = userInput.value;
   if (inputProduct === "") {
-    userInput.placeholder = "You have not entered anything. Type in the product name";
+    userInput.placeholder =
+      "You have not entered anything. Type in the product name.";
     return;
   }
   shoppingCart.push(inputProduct);
@@ -32,7 +33,6 @@ function renderList() {
 
 buttonClick.addEventListener("click", addProduct);
 
-// Reset placeholder when user clicks inside the input
-userInput.addEventListener("focus", function() {
+userInput.addEventListener("focus", function () {
   userInput.placeholder = "Type in the product you want to add";
 });
