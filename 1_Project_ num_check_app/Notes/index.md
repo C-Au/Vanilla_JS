@@ -54,12 +54,8 @@ The page renders a simple layout and works with the script file to check the num
 
 ## Change Log
 
-- 2026-06-30: Created `styles.css` with modern styling including gradient background, centered card layout, and responsive design.
-- 2026-06-30: Updated `Index.html` to link to the new stylesheet and wrapped content in a container div with a title heading.
-- 2026-06-30: Added input focus states, button hover animations, and improved overall visual appearance.
-- 2026-06-29: Updated the walkthrough to match the current markup and behavior.
-- 2026-06-29: Replaced the old input description with the current whole-number label and text input.
-- 2026-06-29: Noted that `script.js` now handles the validation and output behavior.
+- 2026-06-30: Created `styles.css` with modern styling (gradient background, centered card layout, responsive design), updated `Index.html` to link stylesheet with container div and title heading, and added input focus states and button hover animations.
+- 2026-06-29: Updated walkthrough to match current markup and behavior, replaced old input description with whole-number label and text input, and noted that `script.js` handles validation and output behavior.
 
 ## Notes
 

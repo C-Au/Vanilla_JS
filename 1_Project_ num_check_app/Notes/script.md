@@ -40,9 +40,7 @@ The script successfully connects to the HTML elements and listens for clicks. Wh
 
 ## Change Log
 
-- 2026-06-29: Updated the walkthrough to match the current working function.
-- 2026-06-29: Documented the number checks for invalid input, zero, negative numbers, even numbers, and odd numbers.
-- 2026-06-29: Added the current result messages shown in `#numberResult`.
+- 2026-06-29: Updated walkthrough to match current working function, documented number checks (invalid input, zero, negative, even, odd), and added result messages shown in `#numberResult`.
 
 ## Notes
 

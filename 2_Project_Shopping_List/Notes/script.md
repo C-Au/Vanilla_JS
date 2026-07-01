@@ -60,10 +60,7 @@ When a user clicks the "Add Item" button:
 
 ## Change Log
 
-- 2026-07-01: Created initial documentation for shopping list script.
-- 2026-07-01: Documented the addProduct function for adding items.
-- 2026-07-01: Documented the renderList function for displaying items.
-- 2026-07-01: Added note about function-within-function calling pattern.
+- 2026-07-01: Created initial documentation for shopping list script, including addProduct and renderList functions, and function-within-function calling pattern notes.
 
 ## Notes
 

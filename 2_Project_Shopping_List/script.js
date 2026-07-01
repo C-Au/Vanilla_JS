@@ -5,7 +5,9 @@ const userInput = document.getElementById("productInput");
 
 function addProduct() {
   const inputProduct = userInput.value;
-  
+  if (inputProduct === "") {
+    return;
+  }
   shoppingCart.push(inputProduct);
   userInput.value = "";
   renderList();
@@ -19,4 +21,5 @@ function renderList() {
     listDisplay.appendChild(newItem);
   }
 }
+
 buttonClick.addEventListener("click", addProduct);
