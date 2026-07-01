@@ -1,2 +1,1 @@
-const shoppingCart = []
-
+const shoppingCart = [];
