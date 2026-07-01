@@ -6,12 +6,12 @@ const userInput = document.getElementById("productInput");
 function addProduct() {
   const inputProduct = userInput.value;
   if (inputProduct === "") {
-    userInput.placeholder = "Nothing entered";
+    userInput.placeholder = "You have not entered anything. Type in the product name";
     return;
   }
   shoppingCart.push(inputProduct);
   userInput.value = "";
-  userInput.placeholder = "Enter Product Name"; 
+  userInput.placeholder = "Type in the product you want to add";
   renderList();
 }
 
@@ -23,7 +23,7 @@ function renderList() {
     newItem.addEventListener("click", function () {
       const indexToDelete = newItem.dataset.index;
       shoppingCart.splice(indexToDelete, 1);
-      renderList()
+      renderList();
     });
     newItem.textContent = shoppingCart[i];
     listDisplay.appendChild(newItem);
@@ -31,3 +31,8 @@ function renderList() {
 }
 
 buttonClick.addEventListener("click", addProduct);
+
+// Reset placeholder when user clicks inside the input
+userInput.addEventListener("focus", function() {
+  userInput.placeholder = "Type in the product you want to add";
+});
