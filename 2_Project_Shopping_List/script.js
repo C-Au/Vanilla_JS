@@ -17,6 +17,12 @@ function renderList() {
   listDisplay.innerHTML = "";
   for (let i = 0; i < shoppingCart.length; i++) {
     const newItem = document.createElement("li");
+    newItem.dataset.index = i;
+    newItem.addEventListener("click", function () {
+      const indexToDelete = newItem.dataset.index;
+      shoppingCart.splice(indexToDelete, 1);
+      renderList()
+    });
     newItem.textContent = shoppingCart[i];
     listDisplay.appendChild(newItem);
   }
