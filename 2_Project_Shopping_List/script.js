@@ -6,10 +6,12 @@ const userInput = document.getElementById("productInput");
 function addProduct() {
   const inputProduct = userInput.value;
   if (inputProduct === "") {
+    userInput.placeholder = "Nothing entered";
     return;
   }
   shoppingCart.push(inputProduct);
   userInput.value = "";
+  userInput.placeholder = "Enter Product Name"; 
   renderList();
 }
 
