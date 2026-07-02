@@ -44,13 +44,22 @@ The button gets behavior from `script.js`, which listens for clicks and adds the
 
 `<ul id="productList"></ul>` is the container where products will be displayed as list items.
 
-This is where `script.js` will dynamically create and display each item from the shopping cart.
+This is where `script.js` will dynamically create and display each item from the shopping cart. Completed items will be styled with the `.completed` CSS class.
 
-### 5. Styling with styles.css
+### 5. Input attributes
+
+The input field includes several attributes for better UX:
+
+- `placeholder="Type in the product you want to add"` — Shows hint text to guide the user
+- `maxlength="50"` — Limits input to 50 characters
+- `autofocus` — Puts the cursor in the field when the page loads for faster interaction
+
+### 6. Styling with styles.css
 
 The external stylesheet `styles.css` provides styling for the page elements:
 
-- `#productInput` — Styles the input field with width and padding adjustments to make it more visually appealing and easier to use.
+- `.completed` — Styles completed items with strikethrough text and reduced opacity
+- `#productInput`, `#button`, `#productList` — Styles the input field, button, and list area
 
 The stylesheet separates the presentation layer from the HTML structure, making the code more organized and maintainable.
 
@@ -58,3 +67,4 @@ The stylesheet separates the presentation layer from the HTML structure, making 
 
 - 2026-07-01: Created initial documentation for shopping list HTML structure.
 - 2026-07-01: Added stylesheet link to `styles.css`, input attributes (`placeholder`, `maxlength`, `autofocus`), removed label element, and updated button text.
+- 2026-07-01: Updated documentation to reflect object-based storage, toggle functionality for completed items, and `.completed` CSS class for visual feedback.
