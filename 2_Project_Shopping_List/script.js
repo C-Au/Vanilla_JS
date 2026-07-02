@@ -10,7 +10,7 @@ function addProduct() {
       "You have not entered anything. Type in the product name.";
     return;
   }
-  shoppingCart.push(inputProduct);
+  shoppingCart.push({ name: inputProduct, completed: false });
   userInput.value = "";
   userInput.placeholder = "Type in the product you want to add";
   renderList();
@@ -23,10 +23,14 @@ function renderList() {
     newItem.dataset.index = i;
     newItem.addEventListener("click", function () {
       const indexToDelete = newItem.dataset.index;
-      shoppingCart.splice(indexToDelete, 1);
+      shoppingCart[indexToDelete].completed =
+        !shoppingCart[indexToDelete].completed;
       renderList();
     });
-    newItem.textContent = shoppingCart[i];
+    newItem.textContent = shoppingCart[i].name;
+    if (shoppingCart[i].completed) {
+      newItem.classList.add("completed");
+    }
     listDisplay.appendChild(newItem);
   }
 }

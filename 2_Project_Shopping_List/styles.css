@@ -2,3 +2,12 @@
   width: 21%;
   padding: 3px;
 }
+
+.completed {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+#button #productList {
+  cursor: pointer;
+}
