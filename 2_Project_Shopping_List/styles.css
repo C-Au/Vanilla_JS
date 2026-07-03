@@ -1,13 +1,376 @@
-#productInput {
-  width: 21%;
-  padding: 3px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.completed {
-  text-decoration: line-through;
-  opacity: 0.5;
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 20px;
 }
 
-#button #productList {
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  padding: 40px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+  font-size: 32px;
+}
+
+h2 {
+  color: #444;
+  margin-bottom: 20px;
+  font-size: 24px;
+  border-bottom: 2px solid #667eea;
+  padding-bottom: 10px;
+}
+
+h3 {
+  color: #555;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+/* ============================================
+   TABS
+   ============================================ */
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.tab-button {
+  padding: 12px 24px;
+  border: none;
+  background: transparent;
+  color: #888;
+  font-size: 16px;
+  font-weight: 500;
   cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
 }
+
+.tab-button:hover {
+  color: #667eea;
+}
+
+.tab-button.active {
+  color: #667eea;
+  border-bottom-color: #667eea;
+}
+
+/* ============================================
+   VIEWS
+   ============================================ */
+
+.view {
+  display: none;
+}
+
+.view.active {
+  display: block;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   INPUT SECTIONS
+   ============================================ */
+
+.template-input-section,
+.item-input-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.template-input-section input,
+.item-input-section input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.template-input-section input:focus,
+.item-input-section input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.template-input-section button,
+.item-input-section button {
+  padding: 12px 24px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.template-input-section button:hover,
+.item-input-section button:hover {
+  background: #5568d3;
+}
+
+/* ============================================
+   TEMPLATES LIST
+   ============================================ */
+
+.templates-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.template-card {
+  background: #f8f9fa;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.template-card:hover {
+  border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+.template-card h3 {
+  margin-bottom: 10px;
+}
+
+.template-card p {
+  color: #888;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.template-view-btn {
+  width: 100%;
+  padding: 10px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.template-view-btn:hover {
+  background: #5568d3;
+}
+
+/* ============================================
+   TEMPLATE DETAIL VIEW
+   ============================================ */
+
+#backFromDetailButton {
+  padding: 10px 16px;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background 0.3s ease;
+}
+
+#backFromDetailButton:hover {
+  background: #e0e0e0;
+}
+
+.template-actions,
+.trip-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.action-button {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.action-button {
+  background: #667eea;
+  color: white;
+}
+
+.action-button:hover {
+  background: #5568d3;
+}
+
+.action-button.danger {
+  background: #e74c3c;
+}
+
+.action-button.danger:hover {
+  background: #c0392b;
+}
+
+/* ============================================
+   ITEMS LIST
+   ============================================ */
+
+.items-list {
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+.items-list li {
+  padding: 12px 16px;
+  background: #f8f9fa;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.items-list li.template-item {
+  background: #f0f3ff;
+  border: 2px solid #e8ecff;
+}
+
+/* Trip items are clickable */
+#tripItemsList li {
+  cursor: pointer;
+  user-select: none;
+}
+
+#tripItemsList li:hover {
+  background: #f0f3ff;
+  border-color: #667eea;
+}
+
+#tripItemsList li.completed {
+  background: #e8f5e9;
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+#tripItemsList li.completed span {
+  color: #4caf50;
+}
+
+.template-item span {
+  flex: 1;
+}
+
+.remove-btn {
+  padding: 6px 12px;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.remove-btn:hover {
+  background: #c0392b;
+}
+
+/* ============================================
+   EMPTY STATES
+   ============================================ */
+
+.empty-message,
+.no-trip-message {
+  text-align: center;
+  color: #888;
+  padding: 30px 20px;
+  font-style: italic;
+}
+
+.no-trip-message {
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 2px dashed #ddd;
+}
+
+/* ============================================
+   TRIP INFO
+   ============================================ */
+
+.trip-info {
+  background: #e8ecff;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  color: #555;
+  font-size: 14px;
+}
+
+.trip-info strong {
+  color: #667eea;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 600px) {
+  .container {
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 24px;
+  }
+  
+  .templates-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .template-input-section,
+  .item-input-section {
+    flex-direction: column;
+  }
+  
+  .template-input-section button,
+  .item-input-section button {
+    width: 100%;
+  }
+}
+

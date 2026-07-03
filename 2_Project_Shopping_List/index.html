@@ -3,18 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Shopping List</title>
+    <title>Shopping List Manager</title>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
 <body>
-        <div class="container">
-      <h1>Simple Shopping List</h1>
+    <div class="container">
+        <h1>Shopping List Manager</h1>
+        
+        <!-- Navigation Tabs -->
+        <div class="tabs">
+            <button id="templatesTab" class="tab-button active" data-view="templates">My Templates</button>
+            <button id="tripTab" class="tab-button" data-view="trip">Active Trip</button>
+        </div>
 
-      <input type="text" id="productInput" name="productInput" placeholder="Type in the product you want to add" maxlength="50" autofocus />
+        <!-- Templates View -->
+        <div id="templatesView" class="view active">
+            <h2>Templates</h2>
+            <div class="template-input-section">
+                <input type="text" id="templateNameInput" placeholder="Template name (e.g., Weekly Groceries)" maxlength="50" />
+                <button id="createTemplateButton">Create Template</button>
+            </div>
+            <div id="templatesList" class="templates-list"></div>
+        </div>
 
-      <button id="button">Click to add product</button>
+        <!-- Template Detail View (for editing) -->
+        <div id="templateDetailView" class="view">
+            <h2><span id="templateDetailTitle"></span></h2>
+            <button id="backFromDetailButton">← Back to Templates</button>
+            
+            <div class="item-input-section">
+                <input type="text" id="templateItemInput" placeholder="Add item to template" maxlength="50" />
+                <button id="addItemToTemplateButton">Add Item</button>
+            </div>
+            
+            <ul id="templateItemsList" class="items-list"></ul>
+            
+            <div class="template-actions">
+                <button id="startTripButton" class="action-button">Start Shopping Trip</button>
+                <button id="deleteTemplateButton" class="action-button danger">Delete Template</button>
+            </div>
+        </div>
 
-      <ul id="productList"></ul>
+        <!-- Active Trip View -->
+        <div id="tripView" class="view">
+            <h2>Active Trip</h2>
+            <div id="noTripMessage" class="no-trip-message">
+                <p>No active trip. Go to <strong>My Templates</strong> to start one.</p>
+            </div>
+            
+            <div id="tripContent" class="trip-content" style="display: none;">
+                <p class="trip-info">From template: <strong id="tripSourceName"></strong></p>
+                
+                <div class="item-input-section">
+                    <input type="text" id="tripItemInput" placeholder="Add item during shopping" maxlength="50" />
+                    <button id="addItemToTripButton">Add Item</button>
+                </div>
+                
+                <ul id="tripItemsList" class="items-list"></ul>
+                
+                <div class="trip-actions">
+                    <button id="clearCompletedButton" class="action-button">Clear Completed</button>
+                    <button id="endTripButton" class="action-button danger">End Trip</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
