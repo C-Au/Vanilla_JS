@@ -1,3 +1,3 @@
-This is a project focused on learning the basics of vanilla JavaScript.
+These projects are focused on learning the basics of vanilla JavaScript and HTML.
 
-By Colin Au.
+Created by Colin Au.
