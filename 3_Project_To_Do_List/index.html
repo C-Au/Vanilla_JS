@@ -4,18 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To Do List</title>
+    <script src="script.js" defer></script>
   </head>
   <body>
-    <label for="name">Tasks to be added:</label>
+    <label for="inputField">Tasks to be added:</label>
 
-    <input
-      type="text"
-      id="name"
-      name="name"
-      required
-      minlength="4"
-      maxlength="8"
-      size="10"
-    />
+    <input type="text" id="inputField" required minlength="4" size="50" />
+
+    <button id="button">Add Item</button>
+    <ul id="listInput" class="items-list"></ul>
   </body>
 </html>
