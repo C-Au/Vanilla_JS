@@ -10,4 +10,12 @@ button.addEventListener("click", () => {
   li.textContent = input.value;
   userList.appendChild(li);
   input.value = "";
+
+  // here's the delete button code
+  let delBtn = document.createElement("button");
+  delBtn.textContent = "Delete Task";
+  li.appendChild(delBtn);
+  delBtn.addEventListener("click", () => {
+    li.remove();
+  });
 });
