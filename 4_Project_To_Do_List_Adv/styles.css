@@ -23,6 +23,11 @@ body {
   backdrop-filter: blur(10px);
 }
 
+.completed {
+  text-decoration: line-through;
+}
+
+
 label {
   display: block;
   margin-bottom: 12px;

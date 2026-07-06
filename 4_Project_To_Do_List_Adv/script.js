@@ -13,9 +13,9 @@ button.addEventListener("click", () => {
 
   // here's the delete button code
   let delBtn = document.createElement("button");
-  delBtn.textContent = "Delete Task";
+  delBtn.textContent = "Mark task complete";
   li.appendChild(delBtn);
   delBtn.addEventListener("click", () => {
-    li.remove();
+    li.classList.toggle("completed");
   });
 });
