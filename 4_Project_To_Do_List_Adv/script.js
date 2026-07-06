@@ -1,8 +1,10 @@
 const button = document.getElementById("button");
 const input = document.getElementById("inputField");
 const userList = document.getElementById("listInput");
+const taskField = document.getElementById("taskForm");
 
-button.addEventListener("click", () => {
+taskField.addEventListener("submit", (e) => {
+  e.preventDefault();
   if (input.value.length < 4) {
     return;
   }
