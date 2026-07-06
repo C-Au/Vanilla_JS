@@ -18,4 +18,7 @@ button.addEventListener("click", () => {
   delBtn.addEventListener("click", () => {
     li.remove();
   });
+  li.addEventListener("click", () => {
+    li.classList.toggle("completed");
+  });
 });
