@@ -29,7 +29,7 @@ const taskPost = (text) => {
     li.classList.toggle("completed");
   });
 
-  let saveData = { text: text, completed: false };
+  let saveData = { text, completed: false };
   saveList.push(saveData);
 
   let saveLocal = JSON.stringify(saveList);
