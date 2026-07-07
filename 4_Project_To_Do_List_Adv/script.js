@@ -8,10 +8,14 @@ taskField.addEventListener("submit", (e) => {
   if (input.value.length < 4) {
     return;
   }
-  let li = document.createElement("li");
-  li.textContent = input.value;
-  userList.appendChild(li);
+  taskPost(input.value);
   input.value = "";
+});
+
+const taskPost = (text) => {
+  let li = document.createElement("li");
+  li.textContent = text;
+  userList.appendChild(li);
 
   let delBtn = document.createElement("button");
   delBtn.textContent = "Delete Task";
@@ -23,6 +27,4 @@ taskField.addEventListener("submit", (e) => {
   li.addEventListener("click", () => {
     li.classList.toggle("completed");
   });
-});
-
-// const taskPost = () => {};
+};
