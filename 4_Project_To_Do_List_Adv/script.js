@@ -2,6 +2,7 @@ const button = document.getElementById("button");
 const input = document.getElementById("inputField");
 const userList = document.getElementById("listInput");
 const taskField = document.getElementById("taskForm");
+let saveList = [];
 
 taskField.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -27,4 +28,10 @@ const taskPost = (text) => {
   li.addEventListener("click", () => {
     li.classList.toggle("completed");
   });
+
+  let saveData = { text: text, completed: false };
+  saveList.push(saveData);
+
+  let saveLocal = JSON.stringify(saveList);
+  localStorage.setItem("myList", saveLocal);
 };
