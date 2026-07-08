@@ -3,6 +3,7 @@ const input = document.getElementById("inputField");
 const userList = document.getElementById("listInput");
 const taskField = document.getElementById("taskForm");
 let saveList = [];
+let savedTasks = JSON.parse(localStorage.getItem("myList")) || [];
 
 taskField.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -35,3 +36,7 @@ const taskPost = (text) => {
   let saveLocal = JSON.stringify(saveList);
   localStorage.setItem("myList", saveLocal);
 };
+
+savedTasks.forEach((task) => {
+  taskPost(task.text);
+});
