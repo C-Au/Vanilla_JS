@@ -24,6 +24,9 @@ const taskPost = (text) => {
   li.appendChild(delBtn);
   delBtn.addEventListener("click", () => {
     li.remove();
+    saveList = saveList.filter((item) => {
+      saveData === item;
+    });
   });
 
   li.addEventListener("click", () => {
