@@ -14,9 +14,12 @@ taskField.addEventListener("submit", (e) => {
   input.value = "";
 });
 
-const taskPost = (text) => {
+const taskPost = (text, taskDone) => {
   let li = document.createElement("li");
   li.textContent = text;
+  if (taskDone) {
+    li.classList.add("completed");
+  }
   userList.appendChild(li);
 
   let delBtn = document.createElement("button");
@@ -44,5 +47,5 @@ const taskPost = (text) => {
 };
 
 savedTasks.forEach((task) => {
-  taskPost(task.text);
+  taskPost(task.text, task.completed);
 });
