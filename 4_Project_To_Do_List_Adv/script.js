@@ -31,6 +31,9 @@ const taskPost = (text) => {
 
   li.addEventListener("click", () => {
     li.classList.toggle("completed");
+    saveData.completed = !saveData.completed;
+    let saveLocal = JSON.stringify(saveList);
+    localStorage.setItem("myList", saveLocal);
   });
 
   let saveData = { text, completed: false };
