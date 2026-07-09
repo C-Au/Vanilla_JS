@@ -14,10 +14,10 @@ taskField.addEventListener("submit", (e) => {
   input.value = "";
 });
 
-const taskPost = (text, completed) => {
+const taskPost = (text, complete_state) => {
   let li = document.createElement("li");
   li.textContent = text;
-  if (completed) {
+  if (complete_state) {
     li.classList.add("completed");
   }
   userList.appendChild(li);
@@ -39,7 +39,7 @@ const taskPost = (text, completed) => {
     localStorage.setItem("myList", saveLocal);
   });
 
-  let saveData = { text, completed };
+  let saveData = { text, complete_state };
   saveList.push(saveData);
 
   let saveLocal = JSON.stringify(saveList);
