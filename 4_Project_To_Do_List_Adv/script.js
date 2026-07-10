@@ -34,7 +34,7 @@ const taskPost = (text, complete_state) => {
 
   li.addEventListener("click", () => {
     li.classList.toggle("completed");
-    saveData.completed = !saveData.completed;
+    saveData.complete_state = !saveData.complete_state;
     let saveLocal = JSON.stringify(saveList);
     localStorage.setItem("myList", saveLocal);
   });
@@ -47,5 +47,5 @@ const taskPost = (text, complete_state) => {
 };
 
 savedTasks.forEach((task) => {
-  taskPost(task.text, task.completed);
+  taskPost(task.text, task.complete_state);
 });
