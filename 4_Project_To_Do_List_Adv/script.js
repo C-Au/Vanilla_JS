@@ -1,4 +1,3 @@
-const button = document.getElementById("button");
 const input = document.getElementById("inputField");
 const userList = document.getElementById("listInput");
 const taskField = document.getElementById("taskForm");
