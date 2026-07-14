@@ -116,23 +116,20 @@ const taskPost = (text, complete_state) => {
   li.appendChild(delBtn);
   delBtn.addEventListener("click", () => {
     li.remove();
-    saveList = saveList.filter((item) => saveData !== item);
-    let saveLocal = JSON.stringify(saveList);
-    localStorage.setItem("myList", saveLocal);
+    saveList = saveList.filter((item) => saveTask !== item);
+    updateLocal();
   });
 
   li.addEventListener("click", () => {
     li.classList.toggle("completed");
-    saveData.complete_state = !saveData.complete_state;
-    let saveLocal = JSON.stringify(saveList);
-    localStorage.setItem("myList", saveLocal);
+    saveTask.complete_state = !saveTask.complete_state;
+    updateLocal();
   });
 
-  let saveData = { text, complete_state };
-  saveList.push(saveData);
+  let saveTask = { text, complete_state };
+  saveList.push(saveTask);
 
-  let saveLocal = JSON.stringify(saveList);
-  localStorage.setItem("myList", saveLocal);
+  updateLocal();
 };
 ```
 
@@ -166,6 +163,19 @@ The array must also be updated, or the task would return after a refresh.
 `filter()` creates a new array containing every item except the object belonging
 to the deleted task. The new array replaces `saveList`.
 
+## Code Block 4: Saving the Current List
+
+```javascript
+const updateLocal = () => {
+  let saveLocal = JSON.stringify(saveList);
+  localStorage.setItem("myList", saveLocal);
+};
+```
+
+This helper function keeps the saving code in one place. Instead of repeating
+`JSON.stringify()` and `localStorage.setItem()` inside every event listener,
+the script can simply call `updateLocal()` whenever the list changes.
+
 ### `JSON.stringify()` and `localStorage.setItem()`
 
 JavaScript arrays and objects cannot be stored directly in `localStorage`.
@@ -173,17 +183,17 @@ JavaScript arrays and objects cannot be stored directly in `localStorage`.
 `localStorage.setItem("myList", saveLocal)` stores that string under the same
 `"myList"` key used by `getItem()` at the top of the file.
 
-The script repeats these two lines whenever the list changes so the stored data
-matches what the user sees.
+The function is called after a task is added, after a task is deleted, and after
+a task's completion state changes. This keeps the stored data matched with what
+the user sees.
 
-## Code Block 4: Marking a Task Complete
+## Code Block 5: Marking a Task Complete
 
 ```javascript
 li.addEventListener("click", () => {
   li.classList.toggle("completed");
-  saveData.complete_state = !saveData.complete_state;
-  let saveLocal = JSON.stringify(saveList);
-  localStorage.setItem("myList", saveLocal);
+  saveTask.complete_state = !saveTask.complete_state;
+  updateLocal();
 });
 ```
 
@@ -192,9 +202,9 @@ and forth. If the class is missing, `toggle()` adds it. If it is already there,
 `toggle()` removes it.
 
 The `!` operator means "not." Therefore,
-`saveData.complete_state = !saveData.complete_state` changes `true` to `false`
+`saveTask.complete_state = !saveTask.complete_state` changes `true` to `false`
 or `false` to `true`. The data object and the visible CSS class are changed
-together, and the updated array is then saved to `localStorage`.
+together, and `updateLocal()` then saves the updated array to `localStorage`.
 
 The click listener is attached to the `li`, so clicking the task toggles its
 completed state. The delete button is inside the `li`, so a delete click also
@@ -204,7 +214,7 @@ the final save. The task is then removed from the array by the delete handler.
 In a later improvement, `event.stopPropagation()` could be used in the delete
 handler to prevent the button click from reaching the `li` listener.
 
-## Code Block 5: Loading Tasks When the Page Opens
+## Code Block 6: Loading Tasks When the Page Opens
 
 ```javascript
 savedTasks.forEach((task) => {
@@ -230,3 +240,15 @@ buttons, listeners, and saved task data.
 5. A valid task is created, added to `saveList`, and saved as JSON.
 6. Clicking a task toggles its completed state and saves the change.
 7. Clicking **Delete Task** removes the task from the page and from storage.
+
+## Change Log
+
+### July 14, 2026
+
+- Added the `updateLocal()` helper to centralize JSON conversion and
+  `localStorage` updates.
+- Updated the task object name in the examples from `saveData` to `saveTask`.
+- Updated the delete and completion examples to call `updateLocal()`.
+- Added an explanation of why a helper function avoids repeating the same
+  storage code.
+- Renumbered the code-block headings to include the new saving section.
