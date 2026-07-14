@@ -13,6 +13,11 @@ taskField.addEventListener("submit", (e) => {
   input.value = "";
 });
 
+const updateLocal = () => {
+  let saveLocal = JSON.stringify(saveList);
+  localStorage.setItem("myList", saveLocal);
+};
+
 const taskPost = (text, complete_state) => {
   let li = document.createElement("li");
   li.textContent = text;
@@ -27,22 +32,19 @@ const taskPost = (text, complete_state) => {
   delBtn.addEventListener("click", () => {
     li.remove();
     saveList = saveList.filter((item) => saveData !== item);
-    let saveLocal = JSON.stringify(saveList);
-    localStorage.setItem("myList", saveLocal);
+    updateLocal();
   });
 
   li.addEventListener("click", () => {
     li.classList.toggle("completed");
     saveData.complete_state = !saveData.complete_state;
-    let saveLocal = JSON.stringify(saveList);
-    localStorage.setItem("myList", saveLocal);
+    updateLocal();
   });
 
   let saveData = { text, complete_state };
   saveList.push(saveData);
 
-  let saveLocal = JSON.stringify(saveList);
-  localStorage.setItem("myList", saveLocal);
+  updateLocal();
 };
 
 savedTasks.forEach((task) => {
