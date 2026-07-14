@@ -1,17 +1,62 @@
 # script.js Notes
 
-## Code Block 1: Element Selection
+This script creates an interactive to-do list. A user can add a task, click a
+task to mark it as complete, delete a task, and refresh the page without losing
+the saved tasks. The script uses the HTML document (the DOM), JavaScript arrays,
+and the browser's `localStorage` feature.
+
+## Code Block 1: Selecting HTML Elements and Loading Saved Data
 
 ```javascript
-const button = document.getElementById("button");
 const input = document.getElementById("inputField");
 const userList = document.getElementById("listInput");
 const taskField = document.getElementById("taskForm");
+let saveList = [];
+let savedTasks = JSON.parse(localStorage.getItem("myList")) || [];
 ```
 
-This block grabs the elements from the page that the script needs to work with. It stores the submit button, text input, task list, and form in variables so the rest of the code can use them easily.
+### `document.getElementById()`
 
-## Code Block 2: Form Submission
+`document` represents the current HTML page. The `getElementById()` method
+searches that page for an element whose `id` matches the text inside the
+parentheses.
+
+For example, `document.getElementById("inputField")` finds this element from
+`index.html`:
+
+```html
+<input type="text" id="inputField" />
+```
+
+The result is stored in a variable. This lets the script read the input,
+change the list, and listen for form events without searching for the element
+again.
+
+### The arrays
+
+`saveList` starts as an empty array. It holds the task objects currently created
+by the script. Each task object has this shape:
+
+```javascript
+{
+  text: "Buy groceries",
+  complete_state: false
+}
+```
+
+`savedTasks` loads tasks that were stored during an earlier visit.
+
+### `localStorage.getItem()` and `JSON.parse()`
+
+`localStorage` is a small browser storage area that can keep data after a page
+is refreshed. `getItem("myList")` looks for a stored value using `"myList"` as
+the key. A key is simply a name used to find a stored value later.
+
+Values in `localStorage` are stored as strings, so the script uses
+`JSON.parse()` to convert the stored JSON string back into a JavaScript array.
+The `|| []` part means "use an empty array if nothing has been saved yet."
+
+## Code Block 2: Handling Form Submission
 
 ```javascript
 taskField.addEventListener("submit", (e) => {
@@ -24,14 +69,46 @@ taskField.addEventListener("submit", (e) => {
 });
 ```
 
-This block runs when the form is submitted. It stops the browser from reloading the page, checks that the task text is at least 4 characters long, sends the valid text to `taskPost`, and then clears the input field.
+### `addEventListener()`
 
-## Code Block 3: Adding a Task
+`addEventListener()` attaches a function that should run when something happens
+to an element. Here, the event is `"submit"`, so the callback runs whenever the
+form is submitted. The callback is an arrow function:
 
 ```javascript
-const taskPost = (text) => {
+(e) => {
+  // code that runs after the event
+};
+```
+
+The `e` parameter is the event object. The browser passes it to the callback
+automatically, and it contains information about the event that occurred.
+
+### `preventDefault()`
+
+Forms normally reload the page after submission. `e.preventDefault()` cancels
+that built-in browser behavior. This is important because the task can then be
+added with JavaScript while the current page stays open.
+
+### Validation and `return`
+
+`input.value` is the text currently entered in the input. The `length` property
+counts its characters. If the text has fewer than four characters, `return`
+stops this callback immediately, so an invalid task is not added.
+
+For valid text, `taskPost(input.value)` calls the task-creation function and
+passes the input text to it. Finally, setting `input.value` to an empty string
+clears the input field for the next task.
+
+## Code Block 3: Creating and Saving a Task
+
+```javascript
+const taskPost = (text, complete_state) => {
   let li = document.createElement("li");
   li.textContent = text;
+  if (complete_state) {
+    li.classList.add("completed");
+  }
   userList.appendChild(li);
 
   let delBtn = document.createElement("button");
@@ -39,12 +116,117 @@ const taskPost = (text) => {
   li.appendChild(delBtn);
   delBtn.addEventListener("click", () => {
     li.remove();
+    saveList = saveList.filter((item) => saveData !== item);
+    let saveLocal = JSON.stringify(saveList);
+    localStorage.setItem("myList", saveLocal);
   });
 
   li.addEventListener("click", () => {
     li.classList.toggle("completed");
+    saveData.complete_state = !saveData.complete_state;
+    let saveLocal = JSON.stringify(saveList);
+    localStorage.setItem("myList", saveLocal);
   });
+
+  let saveData = { text, complete_state };
+  saveList.push(saveData);
+
+  let saveLocal = JSON.stringify(saveList);
+  localStorage.setItem("myList", saveLocal);
 };
 ```
 
-This block creates a new task item and adds it to the list. It builds an `li` element for the task text, adds a delete button inside that item, removes the item when the delete button is clicked, and toggles the `completed` class when the task itself is clicked.
+### `document.createElement()`
+
+`document.createElement("li")` creates a new list-item element in memory. It
+does not appear on the page until it is attached to an existing element.
+`li.textContent = text` puts the task text inside the new item.
+
+### Restoring the completed style
+
+The second parameter, `complete_state`, is either truthy or falsy. When a saved
+task was already complete, the `if` statement runs and
+`li.classList.add("completed")` adds the CSS class that styles it as complete.
+
+`classList` is the collection of CSS classes on an element. Its `add()` method
+adds a class without replacing the element's other classes.
+
+### `appendChild()`
+
+`userList.appendChild(li)` places the new `li` inside the `<ul>` on the page.
+The delete button is created in the same way, then
+`li.appendChild(delBtn)` places the button inside that task item.
+
+### Deleting a task with `remove()` and `filter()`
+
+The delete button gets its own click listener. `li.remove()` removes the visible
+task from the page.
+
+The array must also be updated, or the task would return after a refresh.
+`filter()` creates a new array containing every item except the object belonging
+to the deleted task. The new array replaces `saveList`.
+
+### `JSON.stringify()` and `localStorage.setItem()`
+
+JavaScript arrays and objects cannot be stored directly in `localStorage`.
+`JSON.stringify(saveList)` converts them into a JSON string. Then
+`localStorage.setItem("myList", saveLocal)` stores that string under the same
+`"myList"` key used by `getItem()` at the top of the file.
+
+The script repeats these two lines whenever the list changes so the stored data
+matches what the user sees.
+
+## Code Block 4: Marking a Task Complete
+
+```javascript
+li.addEventListener("click", () => {
+  li.classList.toggle("completed");
+  saveData.complete_state = !saveData.complete_state;
+  let saveLocal = JSON.stringify(saveList);
+  localStorage.setItem("myList", saveLocal);
+});
+```
+
+`classList.toggle("completed")` is convenient for a state that switches back
+and forth. If the class is missing, `toggle()` adds it. If it is already there,
+`toggle()` removes it.
+
+The `!` operator means "not." Therefore,
+`saveData.complete_state = !saveData.complete_state` changes `true` to `false`
+or `false` to `true`. The data object and the visible CSS class are changed
+together, and the updated array is then saved to `localStorage`.
+
+The click listener is attached to the `li`, so clicking the task toggles its
+completed state. The delete button is inside the `li`, so a delete click also
+bubbles up to the `li` click listener in the browser. This means the current
+code can also toggle the task's completion state during a delete click before
+the final save. The task is then removed from the array by the delete handler.
+In a later improvement, `event.stopPropagation()` could be used in the delete
+handler to prevent the button click from reaching the `li` listener.
+
+## Code Block 5: Loading Tasks When the Page Opens
+
+```javascript
+savedTasks.forEach((task) => {
+  taskPost(task.text, task.complete_state);
+});
+```
+
+`forEach()` runs the callback once for every item in the `savedTasks` array.
+For each saved task, the callback passes its text and completion state to
+`taskPost()`. This rebuilds the list in the DOM and reconnects the delete and
+completion event listeners after a page refresh.
+
+The same `taskPost()` function is used for both new tasks and restored tasks.
+That keeps the behavior consistent and avoids duplicating the code that creates
+buttons, listeners, and saved task data.
+
+## Overall Flow
+
+1. The script finds the form, input, and list in the HTML.
+2. It loads any previously saved tasks from `localStorage`.
+3. `forEach()` restores each saved task by calling `taskPost()`.
+4. When the user submits the form, the input is validated.
+5. A valid task is created, added to `saveList`, and saved as JSON.
+6. Clicking a task toggles its completed state and saves the change.
+7. Clicking **Delete Task** removes the task from the page and from storage.
