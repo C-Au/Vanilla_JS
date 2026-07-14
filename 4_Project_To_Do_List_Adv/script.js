@@ -31,18 +31,18 @@ const taskPost = (text, complete_state) => {
   li.appendChild(delBtn);
   delBtn.addEventListener("click", () => {
     li.remove();
-    saveList = saveList.filter((item) => saveData !== item);
+    saveList = saveList.filter((item) => saveTask !== item);
     updateLocal();
   });
 
   li.addEventListener("click", () => {
     li.classList.toggle("completed");
-    saveData.complete_state = !saveData.complete_state;
+    saveTask.complete_state = !saveTask.complete_state;
     updateLocal();
   });
 
-  let saveData = { text, complete_state };
-  saveList.push(saveData);
+  let saveTask = { text, complete_state };
+  saveList.push(saveTask);
 
   updateLocal();
 };
