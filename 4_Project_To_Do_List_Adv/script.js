@@ -26,6 +26,8 @@ const taskPost = (text, complete_state) => {
   }
   userList.appendChild(li);
 
+  let saveTask = { text, complete_state };
+
   let delBtn = document.createElement("button");
   delBtn.textContent = "Delete Task";
   li.appendChild(delBtn);
@@ -41,7 +43,6 @@ const taskPost = (text, complete_state) => {
     updateLocal();
   });
 
-  let saveTask = { text, complete_state };
   saveList.push(saveTask);
 
   updateLocal();
