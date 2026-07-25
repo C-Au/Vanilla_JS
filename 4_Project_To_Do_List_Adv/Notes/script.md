@@ -35,7 +35,7 @@ again.
 ### The arrays
 
 `saveList` starts as an empty array. It holds the task objects currently created
-by the script. Each task object has this shape:
+by the script. Each task object is intended to have this shape:
 
 ```javascript
 {
@@ -43,6 +43,14 @@ by the script. Each task object has this shape:
   complete_state: false
 }
 ```
+
+When a new task is submitted, the form calls `taskPost(input.value)` without
+passing `complete_state`, so the property initially has the value
+`undefined`. Because `JSON.stringify()` omits object properties whose value is
+`undefined`, a newly saved incomplete task is stored with only its `text`
+property. Restored tasks receive the saved value when one exists. Clicking a
+task changes `complete_state` to `true` or `false`, after which that property
+is saved explicitly.
 
 `savedTasks` loads tasks that were stored during an earlier visit.
 
@@ -97,8 +105,9 @@ counts its characters. If the text has fewer than four characters, `return`
 stops this callback immediately, so an invalid task is not added.
 
 For valid text, `taskPost(input.value)` calls the task-creation function and
-passes the input text to it. Finally, setting `input.value` to an empty string
-clears the input field for the next task.
+passes the input text to it. Since no completion state is passed for a new
+task, it starts without the `completed` class. Finally, setting `input.value`
+to an empty string clears the input field for the next task.
 
 ## Code Block 3: Creating and Saving a Task
 
@@ -133,8 +142,11 @@ const taskPost = (text, complete_state) => {
 };
 ```
 
+That keeps the behavior consistent and avoids duplicating the code that creates
+
 ### `document.createElement()`
 
+adds that task to the currently empty `saveList`, so later saves include both
 `document.createElement("li")` creates a new list-item element in memory. It
 does not appear on the page until it is attached to an existing element.
 `li.textContent = text` puts the task text inside the new item.
@@ -240,6 +252,9 @@ buttons, listeners, and saved task data.
 5. A valid task is created, added to `saveList`, and saved as JSON.
 6. Clicking a task toggles its completed state and saves the change.
 7. Clicking **Delete Task** removes the task from the page and from storage.
+8. Because the delete button is inside the `li`, its click also bubbles to the
+   task's click listener and briefly toggles the completion state before the
+   task is removed.
 
 ## Change Log
 
@@ -252,3 +267,11 @@ buttons, listeners, and saved task data.
 - Added an explanation of why a helper function avoids repeating the same
   storage code.
 - Renumbered the code-block headings to include the new saving section.
+
+### July 21, 2026
+
+- Documented that new tasks do not pass an initial `complete_state`, so the
+  value is initially `undefined` and is omitted from the first JSON save.
+- Clarified that restored tasks are added back into `saveList` by
+  `taskPost()` before future saves.
+- Added the delete-button event bubbling behavior to the overall flow.
