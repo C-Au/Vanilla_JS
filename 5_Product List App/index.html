@@ -11,12 +11,23 @@
   <body>
     <div class="container">
       <label for="inputField">New Products to be added:</label>
-      <form id="taskForm">
-        <input type="text" id="inputField" size="50" />
-
-        <button type="submit" id="button">Add Item</button>
+      <form id="nameForm">
+        <input
+          type="text"
+          id="textField"
+          size="50"
+          placeholder="Enter product name"
+        />
+        <input
+          type="number"
+          id="numberField"
+          size="50"
+          placeholder="Enter price"
+        />
+        <button type="submit" id="submitButton">Add Item</button>
       </form>
       <ul id="listInput" class="items-list"></ul>
+      <button type="button" id="filterButton">Filter price high to low</button>
     </div>
   </body>
 </html>
