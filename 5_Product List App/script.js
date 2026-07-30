@@ -8,3 +8,7 @@ let products = [
   { name: "Laptop", price: 1000 },
   { name: "Phone", price: 500 },
 ];
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault()
+})
