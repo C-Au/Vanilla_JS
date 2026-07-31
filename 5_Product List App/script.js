@@ -11,4 +11,5 @@ let products = [
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+  productPost(textInput, numberInput);
 });
