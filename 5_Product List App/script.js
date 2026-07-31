@@ -11,5 +11,13 @@ let products = [
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  productPost(textInput, numberInput);
+  if (textInput.value.length === 0) {
+    return;
+  }
+  if (numberInput.value < 0) {
+    return;
+  }
+  productPost(textInput.value, numberInput.value);
+  textInput.value = "";
+  numberInput.value = "";
 });
