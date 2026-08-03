@@ -22,8 +22,12 @@ form.addEventListener("submit", (e) => {
   numberInput.value = "";
 });
 
-const productPost = (productName, productNumber) => {
+const productPost = (name, price) => {
   let li = document.createElement("li");
-  li.textContent = productName + " - $" + productNumber;
+  li.textContent = name + " - $" + price;
   productList.appendChild(li);
+
+  price = Number(price)
+  let saveProduct = { name, price };
+  products.push(saveProduct);
 };
