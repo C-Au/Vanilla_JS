@@ -22,4 +22,8 @@ form.addEventListener("submit", (e) => {
   numberInput.value = "";
 });
 
-const productPost = (productName, productNumber) => {};
+const productPost = (productName, productNumber) => {
+  let li = document.createElement("li");
+  li.textContent = productName + " - $" + productNumber;
+  productList.appendChild(li);
+};
