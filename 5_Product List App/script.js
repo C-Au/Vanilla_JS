@@ -27,7 +27,7 @@ const productPost = (name, price) => {
   li.textContent = name + " - $" + price;
   productList.appendChild(li);
 
-  price = Number(price)
+  price = Number(price);
   let saveProduct = { name, price };
   products.push(saveProduct);
 };
