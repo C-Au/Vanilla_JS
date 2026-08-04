@@ -31,3 +31,9 @@ const productPost = (name, price) => {
   let saveProduct = { name, price };
   products.push(saveProduct);
 };
+
+const displayProduct = (name, price) => {
+  let li = document.createElement("li");
+  li.textContent = name + " - $" + price;
+  productList.appendChild(li);
+};
