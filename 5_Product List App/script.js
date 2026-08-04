@@ -37,3 +37,11 @@ const displayProduct = (name, price) => {
   li.textContent = name + " - $" + price;
   productList.appendChild(li);
 };
+
+filterBtn.addEventListener("click", () => {
+  productList.innerHTML = "";
+  let expensiveProducts = products.filter((product) => product.price > 900);
+  expensiveProducts.forEach((product) => {
+    displayProduct(product.name, product.price);
+  });
+});
