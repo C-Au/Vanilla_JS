@@ -38,6 +38,7 @@ let products = [
 ```
 
 The `products` array holds product objects. Each product has two properties:
+
 - `name` — the product name as a string
 - `price` — the product price as a number
 
@@ -61,6 +62,7 @@ form.addEventListener("submit", (e) => {
 ```
 
 When the form is submitted:
+
 - `e.preventDefault()` stops the page from reloading (the default form behavior).
 - The script checks if the product name is empty. If it is, the function stops early.
 - The script checks if the price is negative. If it is, the function stops early.
@@ -82,6 +84,7 @@ const productPost = (name, price) => {
 ```
 
 The `productPost()` function handles adding a product:
+
 - Creates a new list item (`<li>`) element.
 - Sets its text to display the product name and price (e.g., "Laptop - $1000").
 - Adds the list item to the product list in the DOM so users see it immediately.
@@ -114,6 +117,7 @@ filterBtn.addEventListener("click", () => {
 ```
 
 When the filter button is clicked:
+
 - `productList.innerHTML = ""` clears all products from the list display.
 - `.filter((product) => product.price > 900)` creates a new array with only products that cost more than $900.
 - `.forEach()` loops through the filtered products and calls `displayProduct()` for each one.
